@@ -1,0 +1,11 @@
+Flask
+flask-cors
+python-dotenv
+groq
+elevenlabs
+gunicorn
+python-magic
+flask-limiter
+flask-jwt-extended
+
+

@@ -1,0 +1,7 @@
+runtime: python39
+entrypoint: gunicorn -b :$PORT app:app
+
+env_variables:
+  GROQ_API_KEY: ${GROQ_API_KEY}
+  ELEVENLABS_API_KEY: ${ELEVENLABS_API_KEY}
+  JWT_SECRET_KEY: ${JWT_SECRET_KEY}
