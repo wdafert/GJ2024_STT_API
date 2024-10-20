@@ -11,6 +11,7 @@ import logging
 import time
 import filetype
 import base64
+import traceback
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -111,20 +112,26 @@ def process_audio():
     audio_content = audio_file.read()
 
     # Validate that the file is an MP3
-    if not is_mp3(audio_content):
-        loogger.warning("Uploaded file is not an MP3")
-        return jsonify({'error': 'File must be an MP3'}), 400
+    # if not is_mp3(audio_content):
+    #     loogger.warning("Uploaded file is not an MP3")
+    #     return jsonify({'error': 'File must be an MP3'}), 400
 
     try:
         # Perform transcription using Groq
         logger.info("Sending file to Groq for transcription")
+        
+        # Use BytesIO to wrap the audio content
+        audio_file_like = BytesIO(audio_content)
+        audio_file_like.name = audio_file.filename  # Preserve the original filename
+
         transcription = groq_client.audio.transcriptions.create(
-            file=("audio.mp3", audio_content),
+            file=audio_file_like,
             model="whisper-large-v3-turbo",
             response_format="json",
             language="en",
             temperature=0.0
         )
+
         logger.info(f"Transcription received: {transcription.text}")
 
         # Generate sound effect based on transcription
