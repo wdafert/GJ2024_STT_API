@@ -102,7 +102,7 @@ This application is configured for easy deployment to Heroku. Follow these steps
 5. Push your code to Heroku:   ```
    git push heroku main   ```
 6. Open your app:   ```
-   heroku open   ```
+   heroku open    ```
 
 ### Automatic Deployments
 
