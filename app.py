@@ -82,12 +82,12 @@ def login():
         return jsonify({"msg": "Missing username or password"}), 400
 
     # Check the username and password
-    if username != 'test' or password != 'test':
+    if username == 'gamejam2024' and password == 'happytesting':
+        # Create the access token
+        access_token = create_access_token(identity=username)
+        return jsonify(access_token=access_token), 200
+    else:
         return jsonify({"msg": "Bad username or password"}), 401
-
-    # Create the access token
-    access_token = create_access_token(identity=username)
-    return jsonify(access_token=access_token), 200
 
 @app.route('/process_audio', methods=['POST'])
 @jwt_required()  # This decorator ensures that a valid JWT token is present in the request

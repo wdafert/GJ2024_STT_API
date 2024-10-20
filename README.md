@@ -2,6 +2,20 @@
 
 This project is a Flask-based API that processes audio files, transcribes them using Groq, and generates sound effects using ElevenLabs.
 
+## API Description
+
+Base URL: https://gj2024api-0c10722c7282.herokuapp.com/
+
+### Authentication
+
+The API uses JWT (JSON Web Tokens) for authentication.
+
+#### POST /login
+
+Authenticate and receive a JWT token.
+
+Request body:
+
 ## Setup
 
 1. Clone the repository:   ```
