@@ -4,8 +4,9 @@ python-dotenv
 groq
 elevenlabs
 gunicorn
-python-magic
+filetype
 flask-limiter
 flask-jwt-extended
+
 
 

@@ -26,10 +26,7 @@ This project is a Flask-based API that processes audio files, transcribes them u
 
 ## API Endpoints
 
-- POST `/login`: Get a JWT token
-- POST `/process_audio`: Process an audio file (requires JWT authentication)
-- GET `/get_audio/<filename>`: Get a generated audio file (requires JWT authentication)
+### POST `/login`
+Get a JWT token for authentication.
 
-## Deployment
-
-This application is configured for deployment on Google App Engine. Use the `app.yaml` file for configuration.
+Request body:
