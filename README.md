@@ -46,8 +46,8 @@ Get a JWT token for authentication.
 Request body:
 json
 {
-"username": "test",
-"password": "test"
+"username": "gamejam2024",
+"password": "happytesting"
 }
 
 
@@ -83,17 +83,17 @@ Here's a Python script demonstrating how to use the API:
 python
 import requests
 import base64
-Login and get token
-login_response = requests.post('http://localhost:5000/login', json={
-'username': 'test',
-'password': 'test'
+#Login and get token
+login_response = requests.post('https://gj2024api-0c10722c7282.herokuapp.com/login', json={
+'username': 'gamejam2024',
+'password': 'happytesting'
 })
 token = login_response.json()['access_token']
 Process audio
 with open('your_audio_file.mp3', 'rb') as audio_file:
 files = {'audio': audio_file}
 headers = {'Authorization': f'Bearer {token}'}
-response = requests.post('http://localhost:5000/process_audio', files=files, headers=headers)
+response = requests.post('https://gj2024api-0c10722c7282.herokuapp.com/process_audio', files=files, headers=headers)
 result = response.json()
 print("Transcription:", result['transcription'])
 Save the generated audio

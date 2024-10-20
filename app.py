@@ -1,5 +1,5 @@
 from flask import Flask, request, send_file, jsonify, make_response
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token
 import io
 from io import BytesIO
@@ -17,7 +17,12 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://your-frontend-domain.com"}})
+CORS(app, resources={r"/*": {"origins": [
+    "https://your-frontend-domain.com",
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+    "https://gj2024-asteroids4-20bb85e24ac6.herokuapp.com"
+]}})
 
 # Load environment variables
 load_dotenv()
@@ -72,6 +77,7 @@ def is_mp3(file_content):
     return kind is not None and kind.mime == 'audio/mpeg'
 
 @app.route('/login', methods=['POST'])
+@cross_origin()
 def login():
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
@@ -90,7 +96,8 @@ def login():
         return jsonify({"msg": "Bad username or password"}), 401
 
 @app.route('/process_audio', methods=['POST'])
-@jwt_required()  # This decorator ensures that a valid JWT token is present in the request
+@cross_origin()
+@jwt_required()
 def process_audio():
     logger.info("Received request to /process_audio")
     if 'audio' not in request.files:
@@ -105,7 +112,7 @@ def process_audio():
 
     # Validate that the file is an MP3
     if not is_mp3(audio_content):
-        logger.warning("Uploaded file is not an MP3")
+        loogger.warning("Uploaded file is not an MP3")
         return jsonify({'error': 'File must be an MP3'}), 400
 
     try:
